@@ -1,4 +1,6 @@
 import './globals.sass'
+import styles from '@/styles/layout.module.sass'
+import Navbar from '@/components/Navbar/Navbar';
 
 export const metadata = {
   title: 'Trackoney',
@@ -12,7 +14,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className={styles.root}>
+          <div className={styles.content}>
+            {children}
+          </div>
+          <div className={styles.navbar}>
+            <Navbar />
+          </div>
+        </div>
+      </body>
     </html>
   )
 }

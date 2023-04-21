@@ -1,0 +1,18 @@
+@import '../../styles/variables'
+$MIN_HEIGHT: 40px
+    
+.root 
+    display: inline-grid
+    grid-template-columns: repeat(4, minmax(0, 1fr))
+    width: 100%
+    min-height: $MIN_HEIGHT
+    background-color: $background-secondary
+    border-radius: $margin-1 $margin-1 $margin-0 $margin-0
+    div
+        position: relative
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        padding: $padding-2
+        font-size: $tiny

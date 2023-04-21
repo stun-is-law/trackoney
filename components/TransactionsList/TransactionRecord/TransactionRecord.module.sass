@@ -1,0 +1,48 @@
+@import '@/styles/variables'
+
+.root
+    display: flex
+    gap: $margin-2
+    height: $margin-8
+    width: 100%
+    justify-content: space-between
+
+.leftSide
+    display: flex
+    gap: $margin-2
+    align-items: center
+    
+.circle
+    margin-top: $margin-2
+    margin-bottom: $margin-2
+    height: $margin-6
+    width: $margin-6
+    border-radius: 100%
+    background-color: $background-secondary
+
+.texts
+    display: flex
+    flex-direction: column
+    justify-content: space-evenly
+
+.title
+    font-size: $h6
+    font-weight: $bold
+
+.subtitle
+    font-size: $tiny
+    font-weight: $medium
+    color: $dark-gray
+
+.amount
+    display: flex
+    align-items: center
+    font-size: $h5
+    font-weight: $medium
+    letter-spacing: 1px    
+
+    .income
+        color: $income
+        
+    .expense
+        color: $expense

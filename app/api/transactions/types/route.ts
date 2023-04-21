@@ -7,19 +7,16 @@ export async function GET(request: Request) {
     console.log("<= Connected.");
 
     console.log("=> Fetching data...");
-    const rawTransactions = await sql`
-      SELECT tra.date, cat.name as "category" 
-      FROM transactions tra
-      INNER JOIN categories cat ON tra.category = cat.id
-      ORDER BY date DESC 
+    const rawTypes = await sql`
+      SELECT * FROM "transactionTypes"
     `;
     console.log("<= Fetched.");
 
-    const transactions = rawTransactions.map((row) => row);
+    const types = rawTypes.map((row) => row.type);
 
     console.log("<= Returning data...");
 
-    return new Response(JSON.stringify(transactions));
+    return new Response(JSON.stringify(types));
   } catch (err) {
     console.log("<= Connection failed: " + err);
     return new Response("Connection failed: " + err);
