@@ -1,47 +1,36 @@
-"use client";
+import styles from "./page.module.sass";
+import Add from "./components/Add/Add";
 
-import { useState, use, useEffect } from "react";
-import styles from "./addTransaction.module.sass";
-import { MenuItem, OutlinedInput, Select } from "@mui/material";
+async function getTransactionTypes() {
+  const types = await fetch("http://localhost:3000/api/transactions/types", {
+    cache: "no-store",
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
 
-export default function AddTransaction() {
-  const [transType, setTransType] = useState<string>("expense");
-  const [transTypes, setTransTypes] = useState<string[]>([]);
-  
-  async function getTransactionTypes() {
-    const data = await fetch("http://localhost:3000/api/transactions/types", {
+  return types;
+}
+
+async function getCategories() {
+  const categories = await fetch(
+    "http://localhost:3000/api/transactions/categories",
+    {
       cache: "no-store",
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
-  
-      setTransTypes(data);
-  }
+    }
+  )
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
 
-  useEffect(() => {
-    getTransactionTypes();
-  }, []);
+  return categories;
+}
 
-  const typesOptions = transTypes.map((type: any) => (
-    <MenuItem
-      key={type}
-      value={type}
-      className={styles.typeItem}
-    >
-      {type.slice(0, 1).toUpperCase() + type.slice(1)}
-    </MenuItem>
-  ));
+export default async function Page() {
+  const transTypes = await getTransactionTypes();
+  const categories = await getCategories();
 
   return (
     <div className={styles.root}>
-      <Select
-        className={styles.typeSelect}
-        value={transType}
-        onChange={(event) => setTransType(event.target.value)}
-      >
-        {typesOptions}
-      </Select>
-      <OutlinedInput className={styles.amountInput} placeholder="Amount" />
+      <Add transactionTypes={transTypes} categories={categories} />
     </div>
   );
 }

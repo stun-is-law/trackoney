@@ -3,6 +3,7 @@ export interface TransactionType {
     value: string;
 }
 
-export interface AddTransactionProps {
+export interface AddProps {
     transactionTypes: TransactionType[];
+    categories: any[];
 }
